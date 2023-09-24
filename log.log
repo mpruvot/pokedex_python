@@ -1,0 +1,7 @@
+2023-09-24 18:26:40,951 - INFO - class Pokemon: 139 succefully created !
+2023-09-24 18:26:40,953 - ERROR - Le fichier sprites/omastar.png existe déjà.
+Traceback (most recent call last):
+  File "/Users/marius/Desktop/marius_code/pokedex_python/main.py", line 26, in get_sprites
+    with open(f"sprites/{self.name}.png", 'xb') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: 'sprites/omastar.png'

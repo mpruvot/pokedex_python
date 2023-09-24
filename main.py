@@ -18,9 +18,9 @@ class Pokemon:
         self.sprites = sprites
         
     def get_stats(self) -> dict:
-        pass
-
-    
+        stats_dict = {i.get('stat').get('name'): i.get('base_stat') for i in self.stats}
+        print(stats_dict)
+        
     def get_sprites(self):
         try:
             with open(f"sprites/{self.name}.png", 'xb') as f:
@@ -60,10 +60,12 @@ class Pokefinder:
         except requests.exceptions.HTTPError as err:
             logging.exception(f'ID: {id} not found !')
             raise
-        
-new_poke = Pokefinder()
+       
+def get_all(poke: Pokemon):
+    for i in range(1, 152):
+        poke = pokemon.get_pokemon_by_id(i)
+        poke.get_sprites()
+    
+pokemon = Pokefinder()
 
-test = new_poke.get_pokemon_by_id(139)
-
-
-test.get_sprites()
+get_all(pokemon)

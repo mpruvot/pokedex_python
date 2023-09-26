@@ -11,7 +11,7 @@ class Pokemon:
         self.name = name
         self.base_experience = base_experience
         self.height = height
-        self. is_default = is_default
+        self.is_default = is_default
         self.order = order
         self.weight = weight
         self.stats = stats
@@ -19,6 +19,7 @@ class Pokemon:
         
     def get_stats(self) -> dict:
         stats_dict = {i.get('stat').get('name'): i.get('base_stat') for i in self.stats}
+        return stats_dict
         print(stats_dict)
         
     def get_sprites(self):
@@ -33,7 +34,27 @@ class Pokemon:
         except requests.exceptions.HTTPError as err:
             logging.exception(err)
             raise
-            
+    
+    def get_evolution(self) :
+        next_id = self.id + 1
+        try:
+            current_species = requests.get(f'https://pokeapi.co/api/v2/pokemon-species/{self.id}/')
+            current_species.raise_for_status()
+            result_current = current_species.json()
+            next_species = requests.get(f'https://pokeapi.co/api/v2/pokemon-species/{next_id}/')
+            next_species.raise_for_status()
+            result_next = next_species.json()
+            if result_current.get('evolution_chain').get('url') == result_next.get('evolution_chain').get('url'):
+                return result_next.get('name')
+            else:
+                logging.info(f'{self.name} has no evolution !')
+                return None
+        except requests.exceptions.HTTPError as err:
+            logging.exception(err)
+            raise
+        except AttributeError as e:
+            logging.exception(e)
+
 class Pokefinder:
     def __init__(self) -> None:
         pass
@@ -61,11 +82,9 @@ class Pokefinder:
             logging.exception(f'ID: {id} not found !')
             raise
        
-def get_all(poke: Pokemon):
+def get_all(poke: Pokefinder):
     for i in range(1, 152):
-        poke = pokemon.get_pokemon_by_id(i)
-        poke.get_sprites()
+        all_sprites = poke.get_pokemon_by_id(i)
+        all_sprites.get_sprites()
     
-pokemon = Pokefinder()
 
-get_all(pokemon)

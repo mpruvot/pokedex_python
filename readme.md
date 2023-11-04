@@ -1,51 +1,26 @@
-# pokedex
-LIB EXTERNE AUTHORISE: requests
+# Python Pokedex Project
 
-(cf https://requests.readthedocs.io/en/latest/)
-Ici, nous allons plus nous interessé à l'utilisation d'API externes.
-Pour ce faire, nous allons coder un petit wrapper sur l'api de pokemon.
-Mais qu'est ce qu'un wrapper ? Dans l'usage courant c'est essentiellement une librairie qui permet de manipuler une API en faisant abstraction des appels sur l'api.
-On oublie pas les codes http, les raise_for_status etc etc etc.
+This repository is a reflection of my journey in learning Python. It represents a personal project where I've built a simple wrapper around the Pokémon API. The goal was to practice interacting with external APIs and to solidify my Python programming skills.
 
-## PokeFinder
-PokeFinder est une classe.
-Elle prend rien a l'instanciation
+## Project Description
 
-Elle implementera:
-### get_pokemon_by_name
-`def get_pokemon_by_name(name: str) -> Pokemon`
-get_pokemon_by_name fera un call a l'endpoint `GET https://pokeapi.co/api/v2/pokemon/{id or name}/`
+In this project, I've created a Python script that interacts with the Pokémon API to fetch and store data about Pokémon. It's a command-line application that allows users to enter a Pokémon's name or ID and retrieve detailed information about it, including downloading its image sprites.
 
-et retournera une instance de la class Pokemon (cf ci dessous).
+## Features
 
-### get_pokemon_by_id
-La même chose mais avec l'id cette fois.
+- **Fetch Pokémon Data**: Retrieve detailed information about Pokémon by name or ID.
+- **Download Sprites**: Automatically download and save Pokémon sprites to a local directory.
+- **Error Handling**: Robust error handling and logging for a smooth user experience.
+- **Data Parsing**: Parse and display Pokémon statistics in a user-friendly format.
 
-### get_pokemons_by_ids / get_pokemons_by_names
-Qui prendront respectivement une liste d'int et une liste de str, et qui retournera une liste de Pokemon.
-A toi de voir comment tu veux gerer les erreurs (si un id existe pas ou une str).
+## Learning Outcomes
 
-## Pokemon
-Pokemon est une class qui représente un pokemon.
-Il aura les variables d'instance suivantes:
-- id
-- name
-- base_experience
-- height
-- is_default
-- order
-- weight
-Tu remarquera une similitude avec la réponse de l'API ........
-Pour les methodes suivantes, tu aura peut-être besoin de rajouter des champs (c'est un vrai peut-être, j'ai juste pas verifié)
+Throughout the development of this project, I've learned to:
 
-Elle implementera les methodes suivantes:
-### get_stats
-`def get_stats(self) -> dict[str, Any]`
+- **Make HTTP Requests**: Utilize the `requests` library in Python to make API calls.
+- **File I/O**: Handle file operations for saving data locally.
+- **Exception Handling**: Implement try-except blocks to manage exceptions gracefully.
+- **Logging**: Use Python's logging library to keep track of events and errors.
+- **Data Structures**: Work with dictionaries and lists to organize and manipulate data.
 
-Retourne un dictionnaire contenant les stats du personnages.
-Je te laisse lire la doc, chercher par toi même.
 
-### download_sprites
-`def get_sprites(self)`
-
-Enregistre les sprites dans un dossier /sprites/{pokemon id} si (et uniquement si) elles n'ont pas été encore enregistré.
